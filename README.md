@@ -1,6 +1,6 @@
 # Agent Skills
 
-Custom Hermes Agent skills created by 121Development.
+Custom Hermes Agent skills curated by 121Development.
 
 ## Skills
 
@@ -22,6 +22,20 @@ Analyze the comment/reply section of an X/Twitter post to extract overall sentim
 ### visual-explainer
 Generate self-contained HTML visual explanations for systems, concepts, and architectures. Installed from [nicobailon/visual-explainer](https://github.com/nicobailon/visual-explainer).
 
+### premortem
+Run a premortem on any plan, launch, product, hire, strategy, or decision. Assumes it already failed 6 months from now and works backward to find every reason why. Produces a revised plan with blind spots exposed.
+
+**Triggers:** `premortem this`, `premortem my`, `run a premortem`, `what could kill this`, `future-proof this`, `stress test this plan`, `what am i missing here`, `find the blind spots`
+
+### teach (from mattpocock/skills)
+Structured learning and teaching skill. Defines glossary, mission, learning record, and resources formats for teaching the user new skills within the workspace.
+
+### wayfinder (from mattpocock/skills)
+Navigational decision-making for large investigations. Plan a huge chunk of work as a shared map of investigation tickets on your issue tracker, and resolve them one at a time until the way to the goal is clear.
+
+### humanizer/voice-dna
+Source of truth for writing voice. Rules for pacing, rhythm, banned vocabulary, AI pattern avoidance, and anti-overfitting guidance. Apply with judgment. Spirit over letter.
+
 ## Installation
 
 Copy any skill folder to your Hermes skills directory:
@@ -35,6 +49,14 @@ Or for categorized skills:
 ```bash
 cp -r skill-name ~/.hermes/skills/<category>/
 ```
+
+## Sources
+
+- **Created:** cia-red-team, ogilvy-writing-coach, x-sentiment-analyzer
+- **Forked:** visual-explainer ([nicobailon/visual-explainer](https://github.com/nicobailon/visual-explainer))
+- **From mattpocock/skills:** teach, wayfinder
+- **From Google Doc:** premortem
+- **From message.txt:** humanizer/voice-dna
 
 ## License
 
