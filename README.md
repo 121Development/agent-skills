@@ -36,6 +36,9 @@ Structured learning and teaching skill. Defines glossary, mission, learning reco
 ### wayfinder (from mattpocock/skills)
 Navigational decision-making for large investigations. Plan a huge chunk of work as a shared map of investigation tickets on your issue tracker, and resolve them one at a time until the way to the goal is clear.
 
+### writing-great-skills (from mattpocock/skills)
+A meta-skill for writing great agent skills. Covers prompt engineering, trigger design, context gathering, anti-patterns, and output formatting for maximum agent usefulness.
+
 ### humanizer/voice-dna
 Source of truth for writing voice. Rules for pacing, rhythm, banned vocabulary, AI pattern avoidance, and anti-overfitting guidance. Apply with judgment. Spirit over letter.
 
