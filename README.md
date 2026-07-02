@@ -22,6 +22,9 @@ Analyze the comment/reply section of an X/Twitter post to extract overall sentim
 ### visual-explainer
 Generate self-contained HTML visual explanations for systems, concepts, and architectures. Installed from [nicobailon/visual-explainer](https://github.com/nicobailon/visual-explainer).
 
+### here-now
+Publish static sites to live URLs at {slug}.here.now and store private files in cloud Drives. Use for "publish this", "host this", "deploy this", "share this on the web", "make a website", "put this online", or "save this to my Drive".
+
 ### premortem
 Run a premortem on any plan, launch, product, hire, strategy, or decision. Assumes it already failed 6 months from now and works backward to find every reason why. Produces a revised plan with blind spots exposed.
 
