@@ -1,68 +1,52 @@
 # Agent Skills
 
-Custom Hermes Agent skills curated by 121Development.
+A collection of agent skills for reasoning, writing, analysis, and visual explanation.
 
 ## Skills
 
 ### cia-red-team
-Run a 4-phase hostile stress-test on any idea, plan, or decision using techniques from the CIA's declassified Tradecraft Primer (2009). Use when you want to kill a weak idea before investing months into it.
-
-**Triggers:** `cia red team`, `red team my idea`, `stress test this plan`, `kill my idea`, `hostile review`
+Run a 4-phase hostile stress-test on any idea, plan, or decision. Based on the CIA's declassified Tradecraft Primer (2009) and Red Cell methodology. Designed to find the holes before you commit.
 
 ### ogilvy-writing-coach
-Audit any piece of writing against David Ogilvy's 10 rules from his 1982 internal memo. Diagnoses what's broken, what's working, and gives specific fixes so you learn the rules by doing the rewriting yourself.
-
-**Triggers:** `ogilvy check`, `audit this`, `writing audit`, `review my copy`, `ogilvy writing`
+Audit any piece of writing against David Ogilvy's 10 rules from his 1982 internal memo. Not a rewrite tool. It diagnoses what's broken, what's working, and gives specific fixes so you learn the rules by doing the rewriting yourself.
 
 ### x-sentiment-analyzer
-Analyze the comment/reply section of an X/Twitter post to extract overall sentiment and summarize the main arguments for and against. Tells you if a post is well-received, poorly received, or polarizing.
-
-**Triggers:** `sentiment check`, `what do people think`, `is this well received`, `x sentiment`, `analyze replies`
+Read the reply section of an X/Twitter post and extract overall sentiment. Classifies replies as positive, negative, neutral, or mixed. Surfaces the strongest arguments on each side and delivers a verdict: well-received, poorly received, or polarizing.
 
 ### visual-explainer
-Generate self-contained HTML visual explanations for systems, concepts, and architectures. Installed from [nicobailon/visual-explainer](https://github.com/nicobailon/visual-explainer).
+Generate self-contained HTML visual explanations for systems, concepts, code changes, plans, data, and architectures. Output is a single HTML file with embedded CSS and optionally embedded Mermaid diagrams. No build step. No dependencies.
 
 ### here-now
-Publish static sites to live URLs at {slug}.here.now and store private files in cloud Drives. Use for "publish this", "host this", "deploy this", "share this on the web", "make a website", "put this online", or "save this to my Drive".
+Publish static sites to live URLs and store private files in cloud Drives. Drop HTML, images, PDFs, videos, or documents and get back a shareable link. Or use Drive storage for agent memory, context, plans, and assets that persist across sessions.
 
 ### premortem
-Run a premortem on any plan, launch, product, hire, strategy, or decision. Assumes it already failed 6 months from now and works backward to find every reason why. Produces a revised plan with blind spots exposed.
+Assume your plan already failed 6 months from now and work backward to find every reason why. Based on Gary Klein's method (Harvard Business Review) and Daniel Kahneman's most valued decision-making technique. Produces a revised plan with blind spots exposed.
 
-**Triggers:** `premortem this`, `premortem my`, `run a premortem`, `what could kill this`, `future-proof this`, `stress test this plan`, `what am i missing here`, `find the blind spots`
-
-### teach (from mattpocock/skills)
+### teach
 Structured learning and teaching skill. Defines glossary, mission, learning record, and resources formats for teaching the user new skills within the workspace.
 
-### wayfinder (from mattpocock/skills)
-Navigational decision-making for large investigations. Plan a huge chunk of work as a shared map of investigation tickets on your issue tracker, and resolve them one at a time until the way to the goal is clear.
+### wayfinder
+Plan a huge chunk of work as a shared map of investigation tickets on your issue tracker, and resolve them one at a time until the way to the goal is clear. Built for work that doesn't fit in one session.
 
-### writing-great-skills (from mattpocock/skills)
-A meta-skill for writing great agent skills. Covers prompt engineering, trigger design, context gathering, anti-patterns, and output formatting for maximum agent usefulness.
+### writing-great-skills
+A meta-skill for writing great agent skills. Covers prompt engineering, trigger design, context gathering, anti-patterns, and output formatting.
 
 ### humanizer/voice-dna
 Source of truth for writing voice. Rules for pacing, rhythm, banned vocabulary, AI pattern avoidance, and anti-overfitting guidance. Apply with judgment. Spirit over letter.
 
 ## Installation
 
-Copy any skill folder to your Hermes skills directory:
+Copy any skill folder to your agent's skills directory.
 
 ```bash
-cp -r skill-name ~/.hermes/skills/
+cp -r skill-name /path/to/your/skills/
 ```
 
-Or for categorized skills:
+Or for categorized installs:
 
 ```bash
-cp -r skill-name ~/.hermes/skills/<category>/
+cp -r skill-name /path/to/your/skills/<category>/
 ```
-
-## Sources
-
-- **Created:** cia-red-team, ogilvy-writing-coach, x-sentiment-analyzer
-- **Forked:** visual-explainer ([nicobailon/visual-explainer](https://github.com/nicobailon/visual-explainer))
-- **From mattpocock/skills:** teach, wayfinder
-- **From Google Doc:** premortem
-- **From message.txt:** humanizer/voice-dna
 
 ## License
 
