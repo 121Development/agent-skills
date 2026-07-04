@@ -35,7 +35,7 @@ Structured learning and teaching skill. Defines glossary, mission, learning reco
 Plan a huge chunk of work as a shared map of investigation tickets on your issue tracker, and resolve them one at a time until the way to the goal is clear. Built for work that doesn't fit in one session.
 
 ### writing-great-skills
-A meta-skill for writing great agent skills. Covers prompt engineering, trigger design, context gathering, anti-patterns, and output formatting.
+A meta-skill for writing great agent skills. Covers prompt engineering, trigger design, context gathering, anti-patterns, and output formatting. Draws from Matt Pocock's skill design patterns and Daniel Miessler's PAI skill creation framework, adapted to a harness-agnostic vocabulary of determinism, progressive disclosure, and leading words.
 
 ### humanizer/voice-dna
 Source of truth for writing voice. Rules for pacing, rhythm, banned vocabulary, AI pattern avoidance, and anti-overfitting guidance. Apply with judgment. Spirit over letter.
