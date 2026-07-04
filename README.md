@@ -15,7 +15,7 @@ An agent skill is a deterministic process wrapped in markdown. It tells an AI ag
 | [`general-writing`](general-writing/) | Long-form prose in English or Swedish. Two registers: first-person opinionated (emails, memos, essays) and professional objective (reports, documentation, client deliverables). |
 | [`punchy-content`](punchy-content/) | Short-form social content: LinkedIn posts, X/Twitter posts and threads, newsletters, hooks. First-person opinionated with anti-AI-tell mechanics. |
 | [`ogilvy-writing-coach`](ogilvy-writing-coach/) | Audit any text against David Ogilvy's 10 rules from his 1982 internal memo. Diagnoses what's broken and what's working; you do the rewriting. |
-| [`humanizer`](humanizer/) | Source of truth for writing voice. Rules for pacing, rhythm, banned vocabulary, AI pattern avoidance, and anti-overfitting guidance. |
+| [`humanizer`](humanizer/) | Source of truth for writing voice. Rules for pacing, rhythm, banned vocabulary, AI pattern avoidance, and anti-overfitting guidance. User-invoked; type the skill name to load it. |
 
 ### Reasoning and analysis
 
