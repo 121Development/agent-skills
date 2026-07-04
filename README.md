@@ -22,6 +22,9 @@ Publish static sites to live URLs and store private files in cloud Drives. Drop 
 ### premortem
 Assume your plan already failed 6 months from now and work backward to find every reason why. Based on Gary Klein's method (Harvard Business Review) and Daniel Kahneman's most valued decision-making technique. Produces a revised plan with blind spots exposed.
 
+### superforecaster
+Produce calibrated probability forecasts using Tetlock-style superforecasting methodology. Question triage, reference-class base rates, evidence-weighted updating, adversarial stress-testing, and granular probability commitment. Turns vague "will X happen" questions into auditable, scoreable predictions.
+
 ### teach
 Structured learning and teaching skill. Defines glossary, mission, learning record, and resources formats for teaching the user new skills within the workspace.
 
