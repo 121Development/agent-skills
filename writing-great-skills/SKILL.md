@@ -19,6 +19,33 @@ Pick model-invocation only when the agent must reach the skill on its own, or an
 
 When user-invoked skills multiply past what you can remember, that piled-up cognitive load is cured by a **router skill**: one user-invoked skill that names the others and when to reach for each.
 
+## Skill shape
+
+Skills come in two shapes. Picking the wrong one is the most common structural mistake.
+
+**Simple** — a single `SKILL.md`, no subdirectories, no disclosed references. Appropriate when the skill is one focused capability, the instructions fit comfortably under ~100 lines, and every user of the skill needs every line every time. The cost of simplicity is that everything lives in the context window whenever the skill loads.
+
+**Compound** — `SKILL.md` plus one or more disclosed reference files (methodology docs, component libraries, templates) reached by **context pointers**. Appropriate when the workflow has multiple phases, when different runs need different depths of context, or when the full material would bloat the window for quick-reference use. The cost of compounding is the indirection: the agent must follow pointers correctly, and you must maintain the split boundary.
+
+The decision is not about total line count; it is about **branch divergence**. If every run walks the same path, keep it simple. If some runs need the quick reference and others need the deep methodology, split by branch and push the deep material behind a pointer.
+
+## Directory layout
+
+The host system decides the root path, but the internal layout is standard:
+
+```
+skills/<name>/
+├── SKILL.md                 # always present
+├── references/              # disclosed reference (optional)
+│   └── methodology.md
+├── templates/               # reusable templates (optional)
+│   └── report.md
+└── scripts/                 # executable helpers (optional)
+    └── validate.py
+```
+
+Keep the top level flat. Three subdirectories are enough: `references/` for deep reading, `templates/` for reusable artifacts, `scripts/` for executable helpers. Name every file for what it holds, not for its type (`methodology.md`, not `reference-1.md`).
+
 ## Writing the description
 
 A model-invoked **description** does two jobs — state what the skill is, and list the **branches** that should trigger it. Every word increases **context load**, so a description earns even harder pruning than the body:
@@ -26,6 +53,25 @@ A model-invoked **description** does two jobs — state what the skill is, and l
 - **Front-load the skill's leading word** — the description is where it does its invocation work.
 - **One trigger per branch.** Synonyms that rename a single branch are **duplication** — "build features using TDD … asks for test-first development" is one branch written twice. Collapse them; keep only genuinely distinct branches.
 - **Cut identity that's already in the body.** Keep the description to triggers, plus any "when another skill needs…" reach clause.
+
+## Trigger section
+
+The body needs an explicit trigger section — typically titled "When to activate" or similar — that repeats the branches in the description with more detail. The description is for the model's router; the trigger section is for the model once the skill loads. Both must exist: the description fires the skill, the trigger section confirms the skill was the right choice.
+
+List trigger conditions as concrete user phrases or task shapes, not abstractions. "User asks for a forecast, probability, odds, or likelihood" is better than "statistical queries".
+
+## Instruction voice
+
+Instructions must be imperative: verb-first, direct, actionable. The agent is not being persuaded; it is being directed.
+
+- ✅ "Run the test suite before committing."
+- ✅ "Search 2–4 targeted queries before adjusting the base rate."
+- ❌ "You should run the test suite before committing."
+- ❌ "We will search for relevant information."
+
+The test for instruction voice: can you prepend the word "Agent," and does it still read like an order, not a conversation? If not, rewrite.
+
+Be specific about quantities and limits. "Search 2–4 queries" is better than "do some research" because it sets a **completion criterion** the agent can check.
 
 ## Information hierarchy
 
@@ -60,7 +106,7 @@ Then hunt **no-ops** sentence by sentence, not just line by line: run the no-op 
 
 ## Leading words
 
-A **leading word** is a compact concept already living in the model's pretraining that the agent thinks with while running the skill (e.g. _lesson_, _fog of war_, _tracer bullets_). Repeated throughout the text (though not necessarily - a strong leading word might only be needed once), it accumulates a distributed definition and anchors a whole region of behaviour in the fewest tokens, by recruiting priors the model already holds.
+A **leading word** is a compact concept already living in the model's pretraining that the agent thinks with while running the skill (e.g. _lesson_, _fog of war_, _tracer bullets_). Repeated throughout the text (though not necessarily — a strong leading word might only be needed once), it accumulates a distributed definition and anchors a whole region of behaviour in the fewest tokens, by recruiting priors the model already holds.
 
 It serves predictability twice. In the body it anchors _execution_: the agent reaches for the same behaviour every time the word appears. In the description it anchors _invocation_: when the same word lives in your prompts, docs, and code, the agent links that shared language to the skill and fires it more reliably.
 
@@ -71,6 +117,14 @@ Hunt for opportunities to refactor skills to use leading words. A triad spelled 
 
 You win twice over: fewer tokens, _and_ a sharper hook for the agent to hang its thinking on. Assume every skill is carrying restatements that leading words retire — go find them.
 
+## Worked examples
+
+Every skill that does something should show something. A worked example is not decoration; it is a compressed test case that validates the skill's instructions against reality. The agent reading the skill uses it as a reference point; the user reading the skill uses it to judge whether the skill fits their need.
+
+Include at least one concrete example that walks through a full invocation: the user's input, the skill's response shape, and the key decision points. If the skill has branches, show one example per major branch. Keep examples tight — they should demonstrate the skill's process, not reproduce its full output.
+
+If a skill has no examples, that is a signal that either the skill is purely reference (legitimate, but rare) or the author has not actually exercised it.
+
 ## Failure modes
 
 Use these to diagnose issues the user may be having with the skill.
@@ -80,3 +134,35 @@ Use these to diagnose issues the user may be having with the skill.
 - **Sediment** — stale layers that settle because adding feels safe and removing feels risky. The default fate of any skill without a pruning discipline.
 - **Sprawl** — a skill simply too long, even when every line is live and unique. Hurts readability and maintainability and wastes tokens. The cure is the ladder: disclose **reference** behind pointers, and split by **branch** or sequence so each path carries only what it needs.
 - **No-op** — a line the model already obeys by default, so you pay load to say nothing. The test: does it change behaviour versus the default? A weak leading word (_be thorough_ when the agent is already thorough-ish) is a no-op; the fix is a stronger word (_relentless_), not a different technique.
+
+## Concrete anti-patterns
+
+Copy-level mistakes that show up in review:
+
+| Pattern | Why it fails | Fix |
+|---|---|---|
+| Vague description | "A skill for web development" gives the model nothing to match on | State what it does, name the tools, list trigger phrases |
+| Missing trigger section | The description fires the skill, but the body never confirms the skill was the right choice | Add an explicit "When to activate" section with concrete user phrases |
+| Conversational instructions | "You should create a directory" sounds like advice, not an order | Imperative voice: "Create the directory" |
+| No completion criteria | Steps end with narrative, not a checkable gate | Every step ends on a condition the agent can verify |
+| No examples | The user cannot tell if the skill fits their need | Include one tight worked example per major branch |
+| Broken context pointers | A reference to `references/methodology.md` that does not exist | Verify every pointer before committing |
+| Duplicating external context | Copying global rules or environment setup into the skill | Reference by name; assume the host system provides it |
+| Over-splitting | A 20-line skill with three disclosed reference files | Keep it simple unless branch divergence justifies the split |
+| Under-splitting | A 400-line SKILL.md with no disclosed references | Push deep methodology behind pointers; keep the top as quick reference |
+
+## Pre-flight checklist
+
+Before a skill is ready:
+
+- [ ] **Shape is correct** — simple or compound, justified by branch divergence
+- [ ] **Description earns its load** — model-facing triggers are specific and exhaustive; user-facing description is stripped to identity
+- [ ] **Trigger section exists** — body confirms the branches listed in the description
+- [ ] **Instructions are imperative** — every directive is verb-first and actionable
+- [ ] **Completion criteria are checkable** — every step ends on a verifiable condition
+- [ ] **Examples are present** — at least one worked example per major branch
+- [ ] **Pointers resolve** — every linked file exists and is reachable
+- [ ] **No duplication** — every meaning lives in a single source of truth
+- [ ] **No-ops removed** — every sentence changes behaviour versus the default
+- [ ] **Leading words recruited** — restated concepts are collapsed into pretrained terms
+- [ ] **Tested with realistic input** — the skill was exercised, not just written
