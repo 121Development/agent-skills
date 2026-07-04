@@ -19,6 +19,9 @@ Generate self-contained HTML visual explanations for systems, concepts, code cha
 ### here-now
 Publish static sites to live URLs and store private files in cloud Drives. Drop HTML, images, PDFs, videos, or documents and get back a shareable link. Or use Drive storage for agent memory, context, plans, and assets that persist across sessions.
 
+### handoff
+Compact the current conversation into a handoff document for another agent to pick up. Summarises context, references existing artifacts instead of duplicating them, redacts sensitive info, and suggests skills the next agent should invoke.
+
 ### premortem
 Assume your plan already failed 6 months from now and work backward to find every reason why. Based on Gary Klein's method (Harvard Business Review) and Daniel Kahneman's most valued decision-making technique. Produces a revised plan with blind spots exposed.
 
