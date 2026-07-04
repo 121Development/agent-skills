@@ -1,23 +1,20 @@
 ---
 name: crafting-effective-readmes
-description: Use when writing or improving README files. Not all READMEs are the same — provides templates and guidance matched to your audience and project type.
+description: Use when writing, improving, reviewing, or adding to README files. Trigger when the user mentions README, documentation, project setup instructions, or asks for help making their repo presentable. Provides audience-matched templates and a three-step process.
 ---
 
 # Crafting Effective READMEs
 
-READMEs answer questions your audience will have. Different audiences need different information: a contributor to an OSS project needs different context than future-you opening a config folder.
-
-**Always ask:** Who will read this, and what do they need to know?
-
 ## When to activate
 
-- User wants to create, add to, update, or review a README
-- User hands over a project and the README is missing or stale
-- User asks for help documenting something
+- User wants to write, improve, review, or add to a README
+- User mentions README, documentation, "make this repo presentable", or project setup instructions
+- User hands over a project with missing or stale README
+- User asks for help documenting code, a tool, or a config folder
 
 ## Process
 
-### Step 1: Identify the task
+### Step 1 — Identify the task
 
 Ask: "What README task are you working on?"
 
@@ -28,33 +25,43 @@ Ask: "What README task are you working on?"
 | **Updating** | Capabilities changed, content is stale |
 | **Reviewing** | Checking if README is still accurate |
 
-### Step 2: Run task-specific questions
+**Completion criterion:** User names a task, or you have enough context to select one yourself.
+
+### Step 2 — Run task-specific questions
 
 **Creating initial README:**
-1. What type of project? (see Project Types below)
-2. What problem does this solve in one sentence?
-3. What's the quickest path to "it works"?
-4. Anything notable to highlight?
+1. Identify the project type (see Project Types below)
+2. Ask: what problem does this solve in one sentence?
+3. Ask: what's the quickest path to "it works"?
+4. Ask: anything notable to highlight?
+5. Load the matching template from `templates/`
 
 **Adding a section:**
-1. What needs documenting?
-2. Where should it go in the existing structure?
-3. Who needs this info most?
+1. Ask: what needs documenting?
+2. Read the current README to find where it belongs
+3. Ask: who needs this info most?
+4. Draft the section and propose insertion point
 
 **Updating existing content:**
-1. What changed?
-2. Read current README, identify stale sections
+1. Ask: what changed?
+2. Read the current README, identify stale sections
 3. Propose specific edits
 
 **Reviewing/refreshing:**
-1. Read current README
+1. Read the current README
 2. Check against actual project state (package.json, main files, etc.)
 3. Flag outdated sections
 4. Update "Last reviewed" date if present
 
-### Step 3: Draft and verify
+**Completion criterion:** For creating: template loaded and user confirmed type. For adding/updating/reviewing: specific edits identified and user confirmed.
 
-After drafting, ask: **"Anything else to highlight or include that I might have missed?"**
+### Step 3 — Draft and verify
+
+Draft the README or edits. Then ask: **"Anything else to highlight or include that I might have missed?"**
+
+Iterate on feedback until the user is satisfied.
+
+**Completion criterion:** User confirms the README is complete or explicitly signs off.
 
 ## Project types
 
@@ -74,6 +81,24 @@ Every README needs at minimum:
 1. **Name** — Self-explanatory title
 2. **Description** — What + why in 1–2 sentences
 3. **Usage** — How to use it (examples help)
+
+## Worked examples
+
+**Example 1 — Creating an OSS README**
+
+User: "I just published a CLI tool for formatting JSON. Can you write the README?"
+
+- Step 1: Task = Creating
+- Step 2: Project type = Open Source. Problem = "format JSON from the command line". Quickest path = `npm install -g jsonfmt && jsonfmt file.json`. Notable = supports stdin, pretty/minify modes. Load `templates/oss.md`.
+- Step 3: Draft README with install, usage examples for both file and stdin, contributing section. User adds "also supports YAML input". Update and confirm.
+
+**Example 2 — Updating a stale README**
+
+User: "My README says the API is v1 but we shipped v2 last month."
+
+- Step 1: Task = Updating
+- Step 2: What changed = API v2. Read current README, identify all v1 references, authentication section that changed, and new endpoint list. Propose specific edits.
+- Step 3: Draft edits. User confirms. Note "Last reviewed: [date]" added.
 
 ## Deeper reference
 
