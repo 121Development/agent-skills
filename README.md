@@ -7,6 +7,9 @@ A collection of agent skills for reasoning, writing, analysis, and visual explan
 ### cia-red-team
 Run a 4-phase hostile stress-test on any idea, plan, or decision. Based on the CIA's declassified Tradecraft Primer (2009) and Red Cell methodology. Designed to find the holes before you commit.
 
+### clarify-project-intent
+Run a guided intent-clarification session before, during, or after a project or coding task. Walks the user through discovering their unknowns using the known/unknown matrix so agent and user align on intent before expensive work begins. Produces an Intent Brief with a paste-ready implementation prompt. From Matt Pocock's skill library.
+
 ### ogilvy-writing-coach
 Audit any piece of writing against David Ogilvy's 10 rules from his 1982 internal memo. Not a rewrite tool. It diagnoses what's broken, what's working, and gives specific fixes so you learn the rules by doing the rewriting yourself.
 
