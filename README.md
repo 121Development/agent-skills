@@ -10,6 +10,9 @@ Run a 4-phase hostile stress-test on any idea, plan, or decision. Based on the C
 ### clarify-project-intent
 Run a guided intent-clarification session before, during, or after a project or coding task. Walks the user through discovering their unknowns using the known/unknown matrix so agent and user align on intent before expensive work begins. Produces an Intent Brief with a paste-ready implementation prompt. From Matt Pocock's skill library.
 
+### crafting-effective-readmes
+Write or improve README files matched to audience and project type. Provides templates (OSS, personal, internal, config), section checklists, style guidance, and a three-step process: identify task, run task-specific questions, draft and verify. From the softaworks agent-toolkit.
+
 ### ogilvy-writing-coach
 Audit any piece of writing against David Ogilvy's 10 rules from his 1982 internal memo. Not a rewrite tool. It diagnoses what's broken, what's working, and gives specific fixes so you learn the rules by doing the rewriting yourself.
 
