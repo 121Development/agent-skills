@@ -20,7 +20,7 @@ Generate self-contained HTML visual explanations for systems, concepts, code cha
 Publish static sites to live URLs and store private files in cloud Drives. Drop HTML, images, PDFs, videos, or documents and get back a shareable link. Or use Drive storage for agent memory, context, plans, and assets that persist across sessions.
 
 ### handoff
-Compact the current conversation into a handoff document for another agent to pick up. Summarises context, references existing artifacts instead of duplicating them, redacts sensitive info, and suggests skills the next agent should invoke.
+Compact the current conversation into a handoff document for another agent to pick up. Summarises context, references existing artifacts instead of duplicating them, redacts sensitive info, and suggests skills the next agent should invoke. From Matt Pocock's skill library.
 
 ### premortem
 Assume your plan already failed 6 months from now and work backward to find every reason why. Based on Gary Klein's method (Harvard Business Review) and Daniel Kahneman's most valued decision-making technique. Produces a revised plan with blind spots exposed.
@@ -29,10 +29,10 @@ Assume your plan already failed 6 months from now and work backward to find ever
 Produce calibrated probability forecasts using Tetlock-style superforecasting methodology. Question triage, reference-class base rates, evidence-weighted updating, adversarial stress-testing, and granular probability commitment. Turns vague "will X happen" questions into auditable, scoreable predictions.
 
 ### teach
-Structured learning and teaching skill. Defines glossary, mission, learning record, and resources formats for teaching the user new skills within the workspace.
+Structured learning and teaching skill. Defines glossary, mission, learning record, and resources formats for teaching the user new skills within the workspace. From Matt Pocock's skill library.
 
 ### wayfinder
-Plan a huge chunk of work as a shared map of investigation tickets on your issue tracker, and resolve them one at a time until the way to the goal is clear. Built for work that doesn't fit in one session.
+Plan a huge chunk of work as a shared map of investigation tickets on your issue tracker, and resolve them one at a time until the way to the goal is clear. Built for work that doesn't fit in one session. From Matt Pocock's skill library.
 
 ### writing-great-skills
 A meta-skill for writing great agent skills. Covers prompt engineering, trigger design, context gathering, anti-patterns, and output formatting. Draws from Matt Pocock's skill design patterns and Daniel Miessler's PAI skill creation framework, adapted to a harness-agnostic vocabulary of determinism, progressive disclosure, and leading words.
