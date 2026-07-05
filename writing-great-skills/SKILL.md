@@ -8,6 +8,17 @@ A skill exists to wrangle determinism out of a stochastic system. **Predictabili
 
 **Bold terms** are defined in [`GLOSSARY.md`](GLOSSARY.md); look them up there for the full meaning.
 
+## First principles
+
+These six principles sit above every section that follows. Use them to resolve trade-offs when the rules below conflict.
+
+1. **Trigger from the description.** The frontmatter `description` is the only part read before the skill loads. Say what the skill does and the concrete situations that should trigger it. Do not hide trigger rules in the body.
+2. **Spend tokens like they are scarce.** Assume the agent is already good at general reasoning. Keep only non-obvious workflow, domain constraints, tool choices, failure modes, and validation rules. Delete background, motivation, and generic advice.
+3. **Write procedures, not essays.** Prefer imperative rules, decision points, and small examples. A good skill changes behavior in the next turn; it does not merely explain the topic. Match the procedure to the deliverable's shape: a catalog of techniques with "pick what fits" produces tool-picking, not a flow. If the job is a shaped interaction (an interview, a staged walk, a staged review), the workflow must *be* that shape, with the techniques demoted to steps inside it.
+4. **Use progressive disclosure.** Keep the main skill file short. Push long schemas, examples, provider docs, or variant-specific guidance out into linked `references/` files, reached by a pointer that fires only when needed. Put repeatable fragile operations in `scripts/`. Put reusable output material in `assets/`.
+5. **Validate by use.** A skill is good when a fresh agent applies it correctly on a realistic task — run it blind, and on the weakest model that will run it. After editing, read it as if you had no conversation history and remove anything that would not affect action.
+6. **Examples document the problem, not the solution.** An example earns its tokens by teaching the agent to *recognise a recurring problem* — the smell, the symptom, how you knew it was wrong. The fix you happened to apply is not durable. Write the failure mode and its tell; let the agent derive the fix fresh.
+
 ## Invocation
 
 Two choices, trading different costs:
@@ -73,6 +84,8 @@ The test for instruction voice: can you prepend the word "Agent," and does it st
 
 Be specific about quantities and limits. "Search 2–4 queries" is better than "do some research" because it sets a **completion criterion** the agent can check.
 
+Match the procedure to the deliverable's shape. A catalog of techniques with "pick what fits" produces tool-picking, not a flow. If the job is a shaped interaction (an interview, a staged walk, a staged review), the workflow must *be* that shape, with the techniques demoted to steps inside it.
+
 ## Information hierarchy
 
 A skill is built from two content types — **steps** and **reference** — that mix freely: a skill can be all steps, all reference, or both. The core decision is which to use and where each sits on the **information hierarchy**, a ladder ranked by how immediately the agent needs the material:
@@ -110,16 +123,23 @@ A **leading word** is a compact concept already living in the model's pretrainin
 
 It serves predictability twice. In the body it anchors _execution_: the agent reaches for the same behaviour every time the word appears. In the description it anchors _invocation_: when the same word lives in your prompts, docs, and code, the agent links that shared language to the skill and fires it more reliably.
 
-Hunt for opportunities to refactor skills to use leading words. A triad spelled out at three sites (**duplication**), a description spending a sentence to gesture at one idea — each is a passage begging to **collapse** into a single token. Examples include:
+Hunt for opportunities to refactor skills to use leading words. A triad spelled out at three sites (**duplication**), a description spending a sentence to gesture at one idea — each is a passage begging to **collapse** into a single token. Before and after:
 
-- "fast, deterministic, low-overhead" -> _tight_ — one quality restated across a phase — into a single pretrained word (a _tight_ loop).
-- "a loop you believe in" -> _red_ — converts a fuzzy gate into a binary observable state (the loop goes _red_ on the bug, or it doesn't).
+| Before | After | What changed |
+|---|---|---|
+| "fast, deterministic, low-overhead" | _tight_ | One quality restated across a phase collapses into a single pretrained word (a _tight_ loop). |
+| "a loop you believe in" | _red_ | A fuzzy gate becomes a binary observable state (the loop goes _red_ on the bug, or it doesn't). |
+| "be thorough" | _relentless_ | A weak leading word that the agent already obeys by default is upgraded to a stronger one that actually changes behavior. |
 
 You win twice over: fewer tokens, _and_ a sharper hook for the agent to hang its thinking on. Assume every skill is carrying restatements that leading words retire — go find them.
 
 ## Worked examples
 
 Every skill that does something should show something. A worked example is not decoration; it is a compressed test case that validates the skill's instructions against reality. The agent reading the skill uses it as a reference point; the user reading the skill uses it to judge whether the skill fits their need.
+
+An example earns its tokens by teaching the agent to *recognise a recurring problem* — the smell, the symptom, how you knew it was wrong. The fix you happened to apply is not durable. Write the failure mode and its tell; let the agent derive the fix fresh.
+
+> *Example of durable teaching:* "A directional question gated on a centroid distance read wrong from every bearing" teaches; "so we keyed it on FRONT_ARC" rots.
 
 Include at least one concrete example that walks through a full invocation: the user's input, the skill's response shape, and the key decision points. If the skill has branches, show one example per major branch. Keep examples tight — they should demonstrate the skill's process, not reproduce its full output.
 
@@ -148,6 +168,7 @@ Copy-level mistakes that show up in review:
 | No examples | The user cannot tell if the skill fits their need | Include one tight worked example per major branch |
 | Broken context pointers | A reference to `references/methodology.md` that does not exist | Verify every pointer before committing |
 | Duplicating external context | Copying global rules or environment setup into the skill | Reference by name; assume the host system provides it |
+| Duplicating between body and references | Banned patterns, vocab lists, or formatting rules restated in both SKILL.md and a disclosed reference | Single source of truth; point from body, keep detail in reference |
 | Over-splitting | A 20-line skill with three disclosed reference files | Keep it simple unless branch divergence justifies the split |
 | Under-splitting | A 400-line SKILL.md with no disclosed references | Push deep methodology behind pointers; keep the top as quick reference |
 
@@ -166,3 +187,5 @@ Before a skill is ready:
 - [ ] **No-ops removed** — every sentence changes behaviour versus the default
 - [ ] **Leading words recruited** — restated concepts are collapsed into pretrained terms
 - [ ] **Tested with realistic input** — the skill was exercised, not just written
+
+For a table-form version of this checklist with common failures, see `references/review-checklist.md`.
