@@ -2,7 +2,7 @@
 name: extract-wisdom
 description: >
   Extract structured, high-density wisdom from any content: articles, transcripts,
-  podcasts, papers, books. Use when the user says "extract wisdom from this",
+  podcasts, papers, books, lectures. Use when the user says "extract wisdom from this",
   "distill this into insights", "synthesize this content", "summarize this into
   key takeaways", or feeds you long-form content and wants structured output.
   Also trigger when the user pastes a transcript, article, or document and asks
@@ -18,38 +18,9 @@ Transform any content into a high-density knowledge asset. The goal is not summa
 - User says: "extract wisdom from this", "distill this into insights",
   "synthesize this content", "summarize this into key takeaways"
 - User pastes a transcript, article, paper, book chapter, or long-form text
-  and asks for insights, quotes, habits, facts, or structured output
+  and asks for insights, quotes, habits, facts, or a structured summary
 - User references Daniel Miessler's Fabric pattern or "extract wisdom" workflow
 - Another skill needs a content-decomposition step
-
-## Worked example
-
-User input: a 2,000-word article on deep work by Cal Newport.
-
-Phase 1 output:
-- Title: Deep Work Rules for Focus
-- Author: Cal Newport
-- Medium: article
-- Date: 2016-01-05
-
-Phase 2 sample (ideas):
-- Deep work is cognitively demanding activity done without distraction.
-- The ability to perform deep work is becoming rare and therefore valuable.
-- Schedule every minute of your day in blocks to protect focus time.
-- Quit social media for 30 days, then evaluate which tools you actually miss.
-
-Phase 3 sample (insights):
-- Scarcity of attention drives value of focused work in knowledge economy.
-- Willpower is unreliable; systems and scheduling protect intent better.
-
-Phase 4 sample (quote):
-- "Clarity about what matters provides clarity about what does not."
-  — Cal Newport, on saying no
-  *Why it matters: The criterion for elimination is the criterion for focus.*
-
-Phase 7 (takeaway):
-- In a world of shallow distraction, deep focus creates work that truly outlasts the noise.
-  (15 words)
 
 ## Input
 
@@ -62,9 +33,20 @@ The user provides content in one of these forms:
 If a URL or file path is given, read it first. Do not extract from a URL
 without fetching the content.
 
+**If fetching fails:** Browser, web_extract, API calls, and file reads can all
+fail on paywalled or restricted content. Try these in order:
+1. `web_extract_plus` with `render_js=true` and provider `firecrawl`
+2. `browser_navigate` followed by `browser_console` to extract innerText
+3. `web_search` for quoted phrases or threadreader copies
+4. Ask the user to paste the text directly
+
+If the full source text remains unreachable after these attempts, state the
+blocker clearly and stop. Do not fabricate extraction output from search
+snippets or metadata.
+
 ## Extraction workflow
 
-Run these phases in order. Each phase produces one section of the final output.
+Run these phases in order. Each phase ends on a completion criterion.
 
 ### Phase 1: Capture metadata
 
@@ -73,6 +55,8 @@ Record the source:
 - Author or speaker
 - Medium (article, podcast transcript, book chapter, lecture, etc.)
 - Date (if known)
+
+**Done when:** All four metadata fields are filled. Use "unknown" for missing fields.
 
 ### Phase 2: Extract high-impact ideas
 
@@ -86,6 +70,8 @@ Rules:
 - Include page markers or timestamps if the source has them
 - Skip filler, repetition, and throat-clearing
 
+**Done when:** You have 20-50 bullets and every bullet is 16 words or fewer.
+
 ### Phase 3: Extract abstract insights
 
 Distill 10-20 broader insights from the ideas. These are patterns, principles,
@@ -97,6 +83,9 @@ Rules:
 - Frame as transferable knowledge, not content summary
 - Connect to domains outside the source where natural
 
+**Done when:** You have 10-20 bullets, each 16 words or fewer, and none merely
+reword a Phase 2 idea.
+
 ### Phase 4: Extract verbatim quotes
 
 Capture 3-10 quotes that are especially sharp, surprising, or precisely worded.
@@ -107,12 +96,17 @@ Rules:
 - Attribute to speaker/author
 - Include a 1-sentence note on why this quote matters
 
+**Done when:** You have 3-10 attributed quotes with why-it-matters notes.
+If uncertain about verbatim accuracy, downgrade to a Phase 2 paraphrase.
+
 ### Phase 5: Extract practical habits and facts
 
 - **Habits:** Actions, routines, or behaviors recommended or demonstrated
   in the content. 5-15 items. 16 words max each.
 - **Facts:** Concrete, checkable world-knowledge stated in the content.
   5-15 items. 16 words max each.
+
+**Done when:** Both lists have 5-15 items, all under 16 words.
 
 ### Phase 6: Extract references and tools
 
@@ -121,10 +115,14 @@ Rules:
 - **Recommended tools:** Software, frameworks, or methods mentioned.
   3-10 items.
 
+**Done when:** Both lists have 3-10 items.
+
 ### Phase 7: One-sentence takeaway
 
 Synthesize the entire content into a single sentence of exactly 15 words.
 This is the compressed essence. Every word must earn its place.
+
+**Done when:** The sentence is exactly 15 words. Count twice.
 
 ## Output format
 
@@ -133,28 +131,54 @@ headings and ordering listed there.
 
 ## Quality checks
 
-Before delivering:
+Before delivering, run this checklist. Do not skip it.
 
-1. Count the words in every bullet. Any bullet over 16 words gets cut or
-   split until it complies.
-2. Verify every quote is verbatim. If you are uncertain, downgrade it to a
-   paraphrased idea in Phase 2 instead.
-3. Check the 15-word takeaway. Exactly 15. Not 14. Not 16.
-4. Remove duplicate ideas. One concept should not appear in both Phase 2
-   and Phase 3 unless the Phase 3 version is genuinely abstracted.
-5. Strip meta-commentary. Do not include phrases like "the author argues"
-   or "this section discusses." State the claim directly.
+- [ ] Every Phase 2 bullet is 16 words or fewer.
+- [ ] Every Phase 3 bullet is 16 words or fewer.
+- [ ] Every Phase 5 bullet is 16 words or fewer.
+- [ ] Every quote is verbatim or has been downgraded to Phase 2.
+- [ ] The takeaway is exactly 15 words. Not 14. Not 16.
+- [ ] No concept appears in both Phase 2 and Phase 3 unless Phase 3 genuinely abstracts it.
+- [ ] No meta-commentary ("the author argues", "this section discusses") in bullets.
+- [ ] The word count audit table at the bottom of the output shows zero violations.
+
+If any box is unchecked, fix the violation before delivering.
+
+## Worked example
+
+**Input:** A 2,000-word article on deep work by Cal Newport.
+
+**Phase 1:**
+- Title: Deep Work Rules for Focus
+- Author: Cal Newport
+- Medium: article
+- Date: 2016-01-05
+
+**Phase 2 (4 of 32 ideas):**
+- Deep work is cognitively demanding activity done without distraction.
+- The ability to perform deep work is becoming rare and therefore valuable.
+- Schedule every minute of your day in blocks to protect focus time.
+- Quit social media for 30 days, then evaluate which tools you actually miss.
+
+**Phase 3 (2 of 14 insights):**
+- Scarcity of attention drives value of focused work in knowledge economy.
+- Willpower is unreliable; systems and scheduling protect intent better.
+
+**Phase 4 (1 of 6 quotes):**
+- "Clarity about what matters provides clarity about what does not."
+  — Cal Newport, on saying no
+  *Why it matters: The criterion for elimination is the criterion for focus.*
+
+**Phase 7:**
+- In a world of shallow distraction, deep focus creates work that truly outlasts the noise.
+  (15 words)
 
 ## Failure modes
 
-- **Bloated bullets:** Bullets creep past 16 words because the extractor
-  tries to preserve nuance. Fix: split into two bullets or delete the
-  weaker half.
-- **Summary masquerading as wisdom:** The output restates what happened
-  in the content rather than extracting durable knowledge. Fix: ask
-  "would this idea be useful to someone who has never read the source?"
-- **Empty quotes:** Quotes chosen because they sound important but say
-  nothing specific. Fix: prefer the surprising over the noble.
-- **Phase 3 duplicates Phase 2:** Abstract insights just reword the ideas
-  without elevating them. Fix: Phase 3 should name patterns the original
-  author never explicitly stated.
+| Smell | Diagnosis | Fix |
+|-------|-----------|-----|
+| Bullets creep past 16 words | The extractor tries to preserve nuance in one bullet | Split into two bullets or delete the weaker half |
+| Output restates what happened in the content | Summary masquerading as wisdom | Ask: "Would this idea be useful to someone who has never read the source?" |
+| Quotes sound important but say nothing specific | Empty quotes | Prefer the surprising over the noble |
+| Phase 3 rewords Phase 2 without elevating | Insights lack abstraction | Phase 3 should name patterns the original author never explicitly stated |
+| Full source remains unreachable after all fetch attempts | Source inaccessible | State the blocker clearly, list attempted tools, ask user to paste text directly |
