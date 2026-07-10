@@ -41,7 +41,7 @@ An agent skill is a deterministic process wrapped in markdown. It tells an AI ag
 | [`wayfinder`](wayfinder/) | Plan a large chunk of work as a shared map of investigation tickets, resolve them one at a time until the path to the goal is clear. |
 | [`here-now`](here-now/) | Publish static sites to live URLs and store private files in cloud Drives. Drop HTML, images, PDFs, videos, or documents and get back a shareable link. |
 | [`teach`](teach/) | Structured learning and teaching within the workspace. Defines glossary, mission, learning record, and resources formats. |
-| [`grill-for-unknowns`](grill-for-unknowns/) | Interrogate plans against docs/source evidence before building. Surface unknown unknowns, separate facts from decisions, reach shared understanding. Based on Matt Pocock's grill-with-docs + four-quadrant unknowns taxonomy. |
+| [`grill-for-unknowns`](grill-for-unknowns/) | Interrogate plans against docs/source evidence before building. Surface unknown unknowns, separate facts from decisions, reach shared understanding. Adapted by Nico Bailon from Matt Pocock's grill-with-docs; adds four-quadrant unknowns taxonomy, blindspot passes, and durable artifacts. |
 
 ### Social and monitoring
 
