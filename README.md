@@ -26,6 +26,7 @@ An agent skill is a deterministic process wrapped in markdown. It tells an AI ag
 | [`premortem`](premortem/) | Assume your plan already failed 6 months from now and work backward to find every reason why. Based on Gary Klein's method. |
 | [`clarify-project-intent`](clarify-project-intent/) | Guided intent-clarification session before expensive work. Walks through the known/unknown matrix and produces an Intent Brief. |
 | [`extract-wisdom`](extract-wisdom/) | Transform any content into a high-density knowledge asset. 7-phase extraction: ideas, insights, quotes, habits, facts, references, and a 15-word takeaway. |
+| [`structure-problem`](structure-problem/) | Write a decision memo by running independent top-down (principles to possibilities) and bottom-up (evidence to findings) analyses, comparing them on one page, and stating the conclusion first with a reversal condition.
 
 ### Visual explanation
 
