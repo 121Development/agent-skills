@@ -43,6 +43,12 @@ An agent skill is a deterministic process wrapped in markdown. It tells an AI ag
 | [`teach`](teach/) | Structured learning and teaching within the workspace. Defines glossary, mission, learning record, and resources formats. |
 | [`grill-for-unknowns`](grill-for-unknowns/) | Interrogate plans against docs/source evidence before building. Surface unknown unknowns, separate facts from decisions, reach shared understanding. Adapted by Nico Bailon from Matt Pocock's grill-with-docs; adds four-quadrant unknowns taxonomy, blindspot passes, and durable artifacts. |
 
+### Security
+
+| Skill | What it does |
+|-------|-------------|
+| [`vibe-launch-security`](vibe-launch-security/) | 30-minute pre-launch security checklist for vibe-coded apps. Covers legal protection, database lockdown, auth failure testing, 4 AI security prompts, and infrastructure hardening. |
+
 ### Social and monitoring
 
 | Skill | What it does |
