@@ -16,6 +16,7 @@ An agent skill is a deterministic process wrapped in markdown. It tells an AI ag
 | [`punchy-content`](punchy-content/) | Short-form social content: LinkedIn posts, X/Twitter posts and threads, newsletters, hooks. First-person opinionated with anti-AI-tell mechanics. |
 | [`ogilvy-writing-coach`](ogilvy-writing-coach/) | Audit any text against David Ogilvy's 10 rules from his 1982 internal memo. Diagnoses what's broken and what's working; you do the rewriting. |
 | [`humanizer`](humanizer/) | Source of truth for writing voice. Rules for pacing, rhythm, banned vocabulary, AI pattern avoidance, and anti-overfitting guidance. User-invoked; type the skill name to load it. |
+| [`blank-to-draft`](blank-to-draft/) | Guide from blank page to complete first draft. Six-step process: North Star headline, bullet brain dump, headline iteration, page prep, skeleton fill, and marination. Enforces the 5-draft framework. |
 
 ### Reasoning and analysis
 
