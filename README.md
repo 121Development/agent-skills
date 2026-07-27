@@ -17,6 +17,7 @@ An agent skill is a deterministic process wrapped in markdown. It tells an AI ag
 | [`ogilvy-writing-coach`](ogilvy-writing-coach/) | Audit any text against David Ogilvy's 10 rules from his 1982 internal memo. Diagnoses what's broken and what's working; you do the rewriting. |
 | [`humanizer`](humanizer/) | Source of truth for writing voice. Rules for pacing, rhythm, banned vocabulary, AI pattern avoidance, and anti-overfitting guidance. User-invoked; type the skill name to load it. |
 | [`blank-to-draft`](blank-to-draft/) | Guide from blank page to complete first draft. Six-step process: North Star headline, bullet brain dump, headline iteration, page prep, skeleton fill, and marination. Enforces the 5-draft framework. |
+| [`ste-writing`](ste-writing/) | Rewrite prose into ASD-STE100 Simplified Technical English to remove AI slop. Two modes: strict (procedures, error messages) and STE-flavored (READMEs, PRs, docs). Active voice, short sentences, no marketing language. |
 
 ### Reasoning and analysis
 
